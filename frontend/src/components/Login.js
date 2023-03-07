@@ -47,11 +47,12 @@ function Login(props) {
     return (
       <div>
         <Stack spacing={2} alignItems="center" mt={2}>
-          <TextField name="username" label="Username" onChange={handleChange} />
+          <TextField name="username" label="Username" value={user.username} onChange={handleChange} />
           <TextField
             name="password"
             label="Password"
             type="password"
+            value={user.password}
             onChange={handleChange}
           />
           <Button variant="outlined" color="primary" onClick={login}>
