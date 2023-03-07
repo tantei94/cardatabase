@@ -1,19 +1,21 @@
 package com.example.cardatabase.service;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import java.security.Key;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Key;
-import java.util.Date;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtService {
 
-    static final long EXPIRATIONTIME = 86400000; //1 day in ms
+    static final long EXPIRATIONTIME = 86400000; // 1 day in ms
 
     static final String PREFIX = "Bearer";
 
@@ -39,6 +41,7 @@ public class JwtService {
                     .parseClaimsJws(token.replace(PREFIX, ""))
                     .getBody()
                     .getSubject();
+
             if (user != null) {
                 return user;
             }

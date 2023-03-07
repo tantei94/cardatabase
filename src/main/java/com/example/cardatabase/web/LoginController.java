@@ -27,20 +27,21 @@ public class LoginController {
     @PostMapping(value = "/login")
     public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
         UsernamePasswordAuthenticationToken creds =
-                new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
+                new UsernamePasswordAuthenticationToken(
+                        credentials.getUsername(),
+                        credentials.getPassword());
 
         Authentication auth = authenticationManager.authenticate(creds);
+
         // Generate token
         String jwts = jwtService.getToken(auth.getName());
 
-        log.info(credentials.toString());
-        log.info(jwts);
-
         // Build response with the generated token
         return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, "Bearer", jwts)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwts)
                 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")
                 .build();
+
     }
 
 

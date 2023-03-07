@@ -10,5 +10,4 @@ public class CardatabaseApplication {
         SpringApplication.run(CardatabaseApplication.class, args);
     }
 
-
 }
